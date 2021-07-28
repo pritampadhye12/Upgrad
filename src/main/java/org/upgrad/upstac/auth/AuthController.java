@@ -53,20 +53,16 @@ public class AuthController {
                     )
             );
 
-
-            if(userService.isApprovedUser( loginRequest.getUserName()) == false){
+            if(!userService.isApprovedUser(loginRequest.getUserName()))
+            {
                 throw new AppException("User Not Approved");
             }
-
-
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
             final String token = tokenProvider.generateToken(authentication);
             LoginResponse result = new LoginResponse(loginRequest.getUserName(), "Success", token);
 
             return ResponseEntity.ok(result);
-
-
         } catch (AppException e) {
 
             throw new ResponseStatusException(

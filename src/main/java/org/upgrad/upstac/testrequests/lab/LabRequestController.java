@@ -51,8 +51,7 @@ public class LabRequestController
     {
         // Method implemented under assignment
         User tester = userLoggedInService.getLoggedInUser();
-        List<TestRequest> requests = testRequestQueryService.findByTester(tester);
-        return requests;
+        return testRequestQueryService.findByTester(tester);
     }
 
     @PreAuthorize("hasAnyRole('TESTER')")
